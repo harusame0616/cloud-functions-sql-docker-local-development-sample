@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "npm run watch:js",
+    "watch:js": "onchange -ik -p 100 \"./**/*.js\" -- npm run dev-server",
+    "dev-server": "functions-framework --target=main"
+  },
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^1.9.0",
+    "onchange": "^7.1.0"
+  },
+  "dependencies": {
+    "mysql2": "^2.3.0"
+  }
+}

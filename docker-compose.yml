@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  app:
+    build: ./app
+    ports:
+      - 8080:8080
+    volumes:
+      - ./app/project:/project
+      - app-node_modules:/projects/node_modules
+    env_file:
+      - .env
+  cloud_sql_proxy:
+    image: gcr.io/cloudsql-docker/gce-proxy:1.19.1
+    command: ["/cloud_sql_proxy", "--dir=/cloudsql", "-instances=${sqlConnectionName}=tcp:0.0.0.0:${dbPort}", "-credential_file=/secrets/credential.json"]
+    volumes:
+      - ./secrets/cloud-sql-credential.json:/secrets/credential.json
+
+
+volumes:
+  app-node_modules:
